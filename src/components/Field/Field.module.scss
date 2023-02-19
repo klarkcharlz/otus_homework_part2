@@ -1,0 +1,10 @@
+$myColor: yellow;
+
+.field{
+    border: 3px solid black;
+    color: $myColor;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}

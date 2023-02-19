@@ -1,12 +1,13 @@
 import React from 'react';
-import './App.css';
-import Hello from './components/Hello/Hello';
+import Field from './components/Field/Field'
+import classes from './App.module.scss';
+
 
 function App() {
   return (
-    <div className="App">
-      <Hello/>
-    </div>
+      <div className={classes.app}>
+          <Field cells={60}/>
+      </div>
   );
 }
 
