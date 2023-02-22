@@ -3,9 +3,9 @@ import classes from './ControlForm.module.scss';
 
 
 type ControlFormProps = {
-    setSettings: any,  // ToDo обращение к проверяющему: какой тип указать для функции
-    setPlayMode: any,
-    reset: any,
+    setSettings: Function,
+    setPlayMode: Function,
+    reset: Function,
     width: number,
     height: number,
     speed: number

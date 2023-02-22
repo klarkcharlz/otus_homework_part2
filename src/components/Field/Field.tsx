@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import classes from './Field.module.scss';
 import Cell from "../Cell/Cell";
 import ControlForm from '../ControlForm/ControlForm';
@@ -6,21 +6,29 @@ import StatusPanel from '../StatusPanel/StatusPanel';
 
 
 type FieldProps = {
-    cells: number
+    cells: number,
+    runGame: boolean,
+    setRunGame: Function
 };
 
 const defaultSettings = {
     width: 200,
     height: 200,
     speed: 2,
-    playMode: true
+    playMode: false,
 }
 
-const Field = ({cells}: FieldProps) => {
+const Field = ({cells, runGame, setRunGame}: FieldProps) => {
     const [width, setWidth] = useState(defaultSettings.width);
     const [height, setHeight] = useState(defaultSettings.height);
     const [speed, setSpeed] = useState(defaultSettings.speed);
-    const [playMode, setPlayMode] = useState(defaultSettings.playMode);
+    const [progress, setProgress] = useState(0);
+
+    useEffect(() => {
+        if (runGame) {
+            setProgress(Math.floor(Math.random() * cells));
+        }
+    }, [runGame]);
 
     const setSettings = (width: number, height: number, speed: number) => {
         setWidth(width);
@@ -28,26 +36,29 @@ const Field = ({cells}: FieldProps) => {
         setSpeed(speed);
     }
 
-    const reset =() => {
+    const reset = () => {
         setWidth(defaultSettings.width);
         setHeight(defaultSettings.height);
         setSpeed(defaultSettings.speed);
-        setPlayMode(defaultSettings.playMode);
+        setRunGame(defaultSettings.playMode);
+        setProgress(0);
     }
 
     return (
         <>
-            <StatusPanel width={width} height={height} speed={speed} run={playMode}/>
-            <ControlForm setSettings={setSettings} setPlayMode={setPlayMode}
-                         reset={reset} speed={speed} width={width} height={height}/>
+            <StatusPanel width={width} height={height} speed={speed}
+                         run={runGame}/>
+            <ControlForm setSettings={setSettings} setPlayMode={setRunGame}
+                         reset={reset} speed={speed} width={width}
+                         height={height}/>
             <div
                 style={
                     {
-                        pointerEvents: playMode ? 'auto': 'none',
+                        pointerEvents: runGame ? 'auto' : 'none',
                     }
                 }
                 className={classes.field}>
-                {
+                { progress ?
                     [...Array(cells)].map((item, index) => {
                         return (
                             <Cell
@@ -55,9 +66,10 @@ const Field = ({cells}: FieldProps) => {
                                 height={height}
                                 width={width}
                                 speed={speed}
+                                active={index <= progress - 1}
                                 id={index + 1}/>
                         )
-                    })
+                    }) : null
                 }
             </div>
         </>
