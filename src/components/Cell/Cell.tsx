@@ -32,7 +32,7 @@ const Cell = ({id, width, height, speed, active=false}: CellProps) => {
             }
             onClick={toggleVisible}>
             <h2 className={visible ? classes.visible: classes.hidden}>
-                {id}&#128512;
+                {id}
             </h2>
         </div>
     );

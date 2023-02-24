@@ -1,21 +1,34 @@
-import React, {ChangeEvent, MouseEvent, useState} from 'react';
+import React, {ChangeEvent, MouseEvent, useEffect, useState} from 'react';
+import {useNavigate} from "react-router-dom";
 import classes from './Register.module.scss';
+import {getUserSettingFromStorage} from "../../utils/utils";
 
 type RegisterProps = {
     saveData: Function,
     cells: number,
-    setRunGame: Function
+    setRunGame: Function,
 };
 
 
 function Register({setRunGame, saveData, cells}: RegisterProps) {
     const [cellsCnt, setCellsCnt] = useState(cells);
     const [name, setName] = useState('');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const {storageName, storageCells} = getUserSettingFromStorage();
+        if(storageName && storageCells){
+            saveData(storageName, storageCells);
+            setRunGame(true);
+            navigate('/game');
+        }
+    }, []);
 
     const saveAndStart = (e: MouseEvent<HTMLElement>) => {
         e.preventDefault();
         saveData(name, cellsCnt);
         setRunGame(true);
+        navigate('/greet')
     }
 
     return (

@@ -1,3 +1,9 @@
+const mockedUsedNavigate = jest.fn();
+jest.mock('react-router-dom', () => ({
+   ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockedUsedNavigate,
+}));
+
 import {render, screen} from '@testing-library/react';
 import StatusPanel from '../../components/StatusPanel/StatusPanel';
 

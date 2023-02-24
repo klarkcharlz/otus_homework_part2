@@ -15,6 +15,7 @@ Large.args = {
   setSettings: () => {},
   setPlayMode: () => {},
   reset: () => {},
+  logOut: () => {},
   width: 400,
   height: 400,
   speed: 2
@@ -24,6 +25,7 @@ export const Small = Template.bind({});
 Small.args = {
   setSettings: () => {},
   setPlayMode: () => {},
+  logOut: () => {},
   width: 50,
   height: 50,
   speed: 0.5

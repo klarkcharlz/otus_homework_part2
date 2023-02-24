@@ -1,10 +1,16 @@
+const mockedUsedNavigate = jest.fn();
+jest.mock('react-router-dom', () => ({
+   ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockedUsedNavigate,
+}));
+
 import {render, screen} from '@testing-library/react';
 import Field from '../../components/Field/Field';
 
 test('From element: exist in the DOM', () => {
     const cells = 50;
-    const runGame = false;
-    render(<Field setRunGame={() => {}} runGame={runGame} cells={cells}/>)
+    const runGame = true;
+    render(<Field logOut={() => {}} setRunGame={() => {}} runGame={runGame} cells={cells}/>)
     for(let i = 0; i < cells; i++) {
         expect(screen.getByText<HTMLElement>(`${i+1}`)).toBeInTheDocument();
     }

@@ -14,12 +14,14 @@ export const Large = Template.bind({});
 Large.args = {
   cells: 60,
   runGame: true,
-  setRunGame: () => {}
+  setRunGame: () => {},
+  logOut: () => {},
 };
 
 export const Small = Template.bind({});
 Small.args = {
   cells: 20,
   runGame: true,
-  setRunGame: () => {}
+  setRunGame: () => {},
+  logOut: () => {},
 };

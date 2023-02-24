@@ -1,10 +1,12 @@
 import React, {ChangeEvent, MouseEvent, useState} from 'react';
 import classes from './ControlForm.module.scss';
+import {useNavigate} from "react-router-dom";
 
 
 type ControlFormProps = {
     setSettings: Function,
     setPlayMode: Function,
+    logOut: Function,
     reset: Function,
     width: number,
     height: number,
@@ -12,10 +14,11 @@ type ControlFormProps = {
 };
 
 
-const ControlForm = ({reset, setSettings, width, height, speed, setPlayMode}: ControlFormProps) => {
+const ControlForm = ({logOut, reset, setSettings, width, height, speed, setPlayMode}: ControlFormProps) => {
     const [widthCell, setWidthCell] = useState(width);
     const [heightCell, setHeightCell] = useState(height);
     const [animationSpeed, setAnimationSpeed] = useState(speed);
+    const navigate = useNavigate();
 
     const saveSize = (e: MouseEvent<HTMLElement>) => {
         e.preventDefault();
@@ -35,6 +38,12 @@ const ControlForm = ({reset, setSettings, width, height, speed, setPlayMode}: Co
     const resetGame = (e: MouseEvent<HTMLElement>) => {
         e.preventDefault();
         reset();
+    };
+
+    const logout = (e: MouseEvent<HTMLElement>) => {
+        e.preventDefault();
+        logOut();
+        navigate('/')
     };
 
     return (
@@ -92,6 +101,9 @@ const ControlForm = ({reset, setSettings, width, height, speed, setPlayMode}: Co
                 </button>
                 <button type='button' onClick={resetGame}>
                     Reset
+                </button>
+                <button type='button' onClick={logout}>
+                    Logout
                 </button>
             </div>
         </>
