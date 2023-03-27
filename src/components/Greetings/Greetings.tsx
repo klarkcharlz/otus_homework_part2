@@ -14,6 +14,9 @@ function Greetings({name}: GreetingsProps) {
         setTimeout(() => {
             navigate('/game')
         }, 1000);
+        return () => {
+            // ToDo как очистить таймер правильно ?
+        }
     }, [name]);
 
     return (
