@@ -1,12 +1,12 @@
 import rootReducer from "../../redux/reducers";
-import {setName, getName} from "../../redux/actions";
+import {setState, getState} from "../../redux/actions";
 
 describe("rootReducer", () => {
     test("should set name state with SET_NAME action", () => {
         const initialState = {
-            name: ""
+            name: ''
         };
-        const action = setName("John");
+        const action = setState({name: "John"});
         const expectedState = {
             name: "John"
         };
@@ -17,7 +17,7 @@ describe("rootReducer", () => {
         const initialState = {
             name: "Mike"
         };
-        const action = getName();
+        const action = getState();
         const expectedState = {
             name: "Mike"
         };

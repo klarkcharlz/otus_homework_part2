@@ -1,24 +1,24 @@
-export const SET_NAME = "SET_NAME";
-export const GET_NAME = "GET_NAME";
+export const SET_STATE = "SET_STATE";
+export const GET_STATE = "GET_STATE";
 
-export interface SetNameAction {
-    type: typeof SET_NAME,
-    payload: string
+export interface SetStateAction {
+    type: typeof SET_STATE,
+    payload: object;
 }
 
-export interface GetNameAction {
-    type: typeof GET_NAME
+export interface GetStateAction {
+    type: typeof GET_STATE
 }
 
-export function setName(name: string): SetNameAction {
+export function setState(data: object): SetStateAction {
     return {
-        type: SET_NAME,
-        payload: name
+        type: SET_STATE,
+        payload: data
     }
 }
 
-export function getName(): GetNameAction {
+export function getState(): GetStateAction {
     return {
-        type: GET_NAME,
+        type: GET_STATE,
     }
 }

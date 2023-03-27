@@ -1,28 +1,28 @@
-import {GET_NAME, GetNameAction, SET_NAME, SetNameAction} from "./actions";
+import {GET_STATE, GetStateAction, SET_STATE, SetStateAction} from "./actions";
 
 export interface RootState {
-    name: string
 }
 
 const initialState: RootState = {
-    name: ""
 }
+
 export default function rootReducer(
     state = initialState,
-    action: SetNameAction | GetNameAction
+    action: GetStateAction | SetStateAction
 ): RootState {
     switch (action.type) {
-        case SET_NAME:
+        case SET_STATE:
             return {
                 ...state,
-                name: action.payload
+                ...action.payload
             }
-        case GET_NAME:
+        case GET_STATE:
             return {
-                ...state,
-                name: state.name
+                ...state
             }
         default:
-            return state
+            return {
+                ...state
+            }
     }
 }
