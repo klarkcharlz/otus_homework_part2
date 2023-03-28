@@ -1,9 +1,11 @@
 import {GET_STATE, GetStateAction, SET_STATE, SetStateAction} from "./actions";
 
 export interface RootState {
+    name: string
 }
 
 const initialState: RootState = {
+    name: ''
 }
 
 export default function rootReducer(

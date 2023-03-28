@@ -1,23 +1,21 @@
-//import rootReducer from './reducers';
-//import { applyMiddleware, createStore } from 'redux';
-//import thunkMiddleware from 'redux-thunk';
-//
-//const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+import {createStore, applyMiddleware} from "redux";
+import {composeWithDevTools} from "redux-devtools-extension";
+import thunk from "redux-thunk";
+import rootReducer from "./reducers";
+import {loadState, saveState} from "./middleware/localstorage";
 
+const persistedState = loadState();
 
-import { applyMiddleware, createStore } from 'redux';
-import rootReducer from './reducers';
+const store = createStore(
+    rootReducer,
+    persistedState,
+    composeWithDevTools(applyMiddleware(thunk)),
+);
 
-const localStorageMiddleware = store => next => action => {
-  const result = next(action);
-  localStorage.setItem('state', JSON.stringify(store.getState()));
-  return result;
-};
-
-const initialState = localStorage.getItem('state')
-  ? JSON.parse(localStorage.getItem('state'))
-    : {};
-  
-const store = createStore(rootReducer, initialState, applyMiddleware(localStorageMiddleware));
+store.subscribe(() => {
+    saveState({
+        name: store.getState().name,
+    });
+});
 
 export default store;

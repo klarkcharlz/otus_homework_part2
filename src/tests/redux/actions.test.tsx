@@ -2,7 +2,7 @@ import rootReducer from "../../redux/reducers";
 import {setState, getState} from "../../redux/actions";
 
 describe("rootReducer", () => {
-    test("should set name state with SET_NAME action", () => {
+    test("should set name state with SET_STATE action", () => {
         const initialState = {
             name: ''
         };
@@ -13,7 +13,7 @@ describe("rootReducer", () => {
         const nextState = rootReducer(initialState, action);
         expect(nextState).toEqual(expectedState);
     });
-    test("should set name state with GET_NAME action", () => {
+    test("should set name state with GET_STATE action", () => {
         const initialState = {
             name: "Mike"
         };
