@@ -6,11 +6,12 @@ describe("rootReducer", () => {
         const initialState = {
             name: ''
         };
-        const action = setState({name: "John"});
         const expectedState = {
             name: "John"
         };
-        const nextState = rootReducer(initialState, action);
+        const nextState = rootReducer(
+            initialState, setState({name: "John"})
+        );
         expect(nextState).toEqual(expectedState);
     });
     test("should return default state for unknown action types", () => {
