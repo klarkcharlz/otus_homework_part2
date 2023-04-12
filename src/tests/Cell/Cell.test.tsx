@@ -1,9 +1,3 @@
-/*
-    ToDo: поломался storybook, из за useNavigate, половина компонент
-        в нем не работает теперь:
-        "usenavigate() may be used only in the context of a <router> component."
- */
-
 import {fireEvent, render, screen} from '@testing-library/react';
 import Cell from '../../components/Cell/Cell';
 

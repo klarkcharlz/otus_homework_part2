@@ -6,7 +6,6 @@ import Register from './components/Register/Register';
 import Greetings from './components/Greetings/Greetings';
 import {setUserSettingToStorage} from './utils/utils';
 
-
 const defaultParams = {
     cells: 60,
     name: '',

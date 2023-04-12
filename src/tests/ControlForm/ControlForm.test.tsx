@@ -9,10 +9,4 @@ test('From element: exist in the DOM', () => {
     render(<ControlForm logOut={() => {}} reset={() => {}} setPlayMode={() => {}} speed={2} setSettings={setSettings} width={200} height={200}/>)
     const elem = screen.getByText<HTMLElement>('Save');
     expect(elem).toBeInTheDocument();
-
-    /*
-        ToDo: как обращаться к инпутам и изменять их значения ?
-    */
-
-    fireEvent.click(elem);
 });

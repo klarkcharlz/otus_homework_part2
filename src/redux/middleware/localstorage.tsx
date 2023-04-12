@@ -1,15 +1,11 @@
-export const loadState = (): any => {
-    try {
-        const serializedState = localStorage.getItem("state");
-        if (serializedState === null) {
-            return undefined;
-        }
-        return JSON.parse(serializedState);
-    } catch (err) {
-        return undefined;
-    }
+import {StateType} from '../actions';
+
+export const loadState = (): StateType | undefined => {
+    const serializedState = localStorage.getItem("state");
+    return serializedState ? JSON.parse(serializedState): undefined;
 };
-export const saveState = (state: any): void => {
+
+export const saveState = (state: StateType): void => {
     try {
         const serializedState = JSON.stringify(state);
         localStorage.setItem("state", serializedState);
