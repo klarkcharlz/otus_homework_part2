@@ -11,9 +11,12 @@ function Greetings({name}: GreetingsProps) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        setTimeout(() => {
+        const timeoutId = setTimeout(() => {
             navigate('/game')
         }, 1000);
+        return () => {
+            clearInterval(timeoutId);
+        }
     }, [name]);
 
     return (

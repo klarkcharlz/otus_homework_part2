@@ -37,7 +37,8 @@ function App() {
                     <Route
                         path='/'
                         element={<Register setRunGame={setRunGame}
-                                           saveData={saveData} cells={cells}/>}
+                                           saveData={saveData}
+                                           cells={cells}/>}
                     />
                     <Route
                         path='/greet'
