@@ -1,7 +1,7 @@
 import React, {ChangeEvent, MouseEvent, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import classes from './Register.module.scss';
-import {getUserSettingFromStorage} from "../../utils/utils";
+
 
 type RegisterProps = {
     saveData: Function,
@@ -16,12 +16,6 @@ function Register({setRunGame, saveData, cells}: RegisterProps) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const {storageName, storageCells} = getUserSettingFromStorage();
-        if(storageName && storageCells){
-            saveData(storageName, storageCells);
-            setRunGame(true);
-            navigate('/game');
-        }
     }, []);
 
     const saveAndStart = (e: MouseEvent<HTMLElement>) => {

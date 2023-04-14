@@ -4,13 +4,15 @@ import {setState} from "../../redux/actions";
 describe("rootReducer", () => {
     test("should set name state with SET_STATE action", () => {
         const initialState = {
-            name: ''
+            name: '',
+            cells: 60
         };
         const expectedState = {
-            name: "John"
+            name: "John",
+            cells: 60
         };
         const nextState = rootReducer(
-            initialState, setState({name: "John"})
+            initialState, setState({name: "John", cells: 60})
         );
         expect(nextState).toEqual(expectedState);
     });

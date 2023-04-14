@@ -4,7 +4,10 @@ import classes from './App.module.scss';
 import Field from './components/Field/Field'
 import Register from './components/Register/Register';
 import Greetings from './components/Greetings/Greetings';
-import {setUserSettingToStorage} from './utils/utils';
+import { connect } from 'react-redux';
+import {
+    saveState, loadState, StateType
+} from './redux/actions';
 
 const defaultParams = {
     cells: 60,
@@ -21,13 +24,11 @@ function App() {
         setCells(defaultParams.cells);
         setName(defaultParams.name);
         setRunGame(defaultParams.runGame);
-        setUserSettingToStorage('', 0);
     }
 
     const saveData = (name: string, cnt: number) => {
         setName(name);
         setCells(cnt);
-        setUserSettingToStorage(name, cnt);
     }
 
     return (
@@ -56,4 +57,13 @@ function App() {
     );
 }
 
-export default App;
+const mapStateToProps = (state: StateType) => ({
+  appState: state
+});
+
+const mapDispatchToProps = {
+  saveState,
+  loadState
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
