@@ -1,9 +1,14 @@
 import {render, screen} from '@testing-library/react';
 import Greetings from '../../components/Greetings/Greetings';
+import { Provider } from 'react-redux';
+import {store} from './../../redux/store';
 
 test('From element: exist in the DOM', () => {
-    const name = 'Mike';
-    render(<Greetings name={name} />)
-    const elem = screen.getByText<HTMLElement>(`Welcome ${name}`);
+    render(
+        <Provider store={store}>
+            <Greetings/>
+        </Provider>
+    )
+    const elem = screen.getByText<HTMLElement>(`Welcome`);
     expect(elem).toBeInTheDocument();
 });

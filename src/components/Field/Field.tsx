@@ -1,12 +1,13 @@
-import React, {useEffect, useState, useLayoutEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import classes from './Field.module.scss';
 import Cell from "../Cell/Cell";
 import ControlForm from '../ControlForm/ControlForm';
 import StatusPanel from '../StatusPanel/StatusPanel';
+import {useSelector} from 'react-redux';
+import {StateType} from "../../redux/actions";
 
 
 type FieldProps = {
-    cells: number,
     runGame: boolean,
     setRunGame: Function,
     logOut: Function
@@ -19,18 +20,21 @@ const defaultSettings = {
     playMode: false
 }
 
-const Field = ({cells, runGame, setRunGame, logOut}: FieldProps) => {
+const Field = ({runGame, setRunGame, logOut}: FieldProps) => {
     const [width, setWidth] = useState(defaultSettings.width);
     const [height, setHeight] = useState(defaultSettings.height);
     const [speed, setSpeed] = useState(defaultSettings.speed);
     const [progress, setProgress] = useState(0);
 
+    const stateCells = useSelector(
+        (state: StateType) => state.cells
+    );
 
     useEffect(() => {
         if (runGame) {
-            setProgress(Math.floor(Math.random() * cells));
+            setProgress(Math.floor(Math.random() * stateCells));
         }
-    }, [runGame, cells]);
+    }, [runGame]);
 
     const setSettings = (width: number, height: number, speed: number) => {
         setWidth(width);
@@ -61,7 +65,7 @@ const Field = ({cells, runGame, setRunGame, logOut}: FieldProps) => {
                 }
                 className={classes.field}>
                 { progress ?
-                    [...Array(cells)].map((item, index) => {
+                    [...Array(stateCells)].map((item, index) => {
                         return (
                             <Cell
                                 key={index}

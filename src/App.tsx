@@ -1,34 +1,31 @@
 import React, {useState} from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import classes from './App.module.scss';
+import {connect} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import Field from './components/Field/Field'
 import Register from './components/Register/Register';
 import Greetings from './components/Greetings/Greetings';
-import { connect } from 'react-redux';
+import classes from './App.module.scss';
 import {
-    saveState, loadState, StateType
+    saveState, loadState, StateType, setState, resetState
 } from './redux/actions';
 
-const defaultParams = {
-    cells: 60,
-    name: '',
-    runGame: false
-}
 
 function App() {
-    const [cells, setCells] = useState(defaultParams.cells);
-    const [name, setName] = useState(defaultParams.name);
-    const [runGame, setRunGame] = useState(defaultParams.runGame);
+    const [runGame, setRunGame] = useState(false);
+    const dispatch = useDispatch();
 
     const logOut = () => {
-        setCells(defaultParams.cells);
-        setName(defaultParams.name);
-        setRunGame(defaultParams.runGame);
+        dispatch(resetState());
     }
 
-    const saveData = (name: string, cnt: number) => {
-        setName(name);
-        setCells(cnt);
+    const saveData = (name: string, cells: number) => {
+        dispatch(
+           setState({
+               name,
+               cells
+           })
+        );
     }
 
     return (
@@ -37,19 +34,24 @@ function App() {
                 <Routes>
                     <Route
                         path='/'
-                        element={<Register setRunGame={setRunGame}
-                                           saveData={saveData}
-                                           cells={cells}/>}
+                        element={
+                            <Register
+                                setRunGame={setRunGame}
+                                saveData={saveData}/>
+                        }
                     />
                     <Route
                         path='/greet'
-                        element={<Greetings name={name}/>}
+                        element={<Greetings/>}
                     />
                     <Route
                         path='/game'
-                        element={<Field setRunGame={setRunGame}
-                                        runGame={runGame} cells={cells}
-                                        logOut={logOut}/>}
+                        element={
+                            <Field
+                                setRunGame={setRunGame}
+                                runGame={runGame}
+                                logOut={logOut}/>
+                        }
                     />
                 </Routes>
             </Router>
@@ -57,13 +59,13 @@ function App() {
     );
 }
 
-const mapStateToProps = (state: StateType) => ({
-  appState: state
+export const mapStateToProps = (state: StateType) => ({
+    appState: state
 });
 
-const mapDispatchToProps = {
-  saveState,
-  loadState
+export const mapDispatchToProps = {
+    saveState,
+    loadState
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

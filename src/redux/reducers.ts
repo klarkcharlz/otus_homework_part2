@@ -1,11 +1,13 @@
 import {
-    SAVE_STATE,
     LOAD_STATE,
-    SET_STATE,
-    StateType,
     LoadStateAction,
+    RESET_STATE,
+    ResetStateAction,
+    SAVE_STATE,
     SaveStateAction,
-    SetStateAction
+    SET_STATE,
+    SetStateAction,
+    StateType
 } from './actions';
 
 
@@ -14,9 +16,11 @@ const initialState = {
     cells: 60
 };
 
+type Actions = ResetStateAction | LoadStateAction | SaveStateAction | SetStateAction;
+
 export default function (
     state:StateType = initialState,
-    action: LoadStateAction | SaveStateAction | SetStateAction
+    action: Actions
 ) {
     switch (action.type) {
         case SAVE_STATE:
@@ -33,6 +37,12 @@ export default function (
             return {
                 ...state,
                 ...action.payload
+            }
+        case RESET_STATE:
+            console.log('RESET_STATE');
+            return {
+                ...state,
+                ...initialState
             }
         default:
             return state;

@@ -1,21 +1,32 @@
 import React, {ChangeEvent, MouseEvent, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
+import {useSelector} from 'react-redux';
+import {StateType} from './../../redux/actions';
 import classes from './Register.module.scss';
-
 
 type RegisterProps = {
     saveData: Function,
-    cells: number,
     setRunGame: Function,
 };
 
 
-function Register({setRunGame, saveData, cells}: RegisterProps) {
-    const [cellsCnt, setCellsCnt] = useState(cells);
-    const [name, setName] = useState('');
+function Register({setRunGame, saveData}: RegisterProps) {
     const navigate = useNavigate();
 
+    const stateName = useSelector(
+        (state: StateType) => state.name
+    );
+    const stateCells = useSelector(
+        (state: StateType) => state.cells
+    );
+
+    const [cellsCnt, setCellsCnt] = useState(stateCells);
+    const [name, setName] = useState(stateName);
+
     useEffect(() => {
+        if(cellsCnt && name) {
+            navigate('/game');
+        }
     }, []);
 
     const saveAndStart = (e: MouseEvent<HTMLElement>) => {
@@ -56,7 +67,7 @@ function Register({setRunGame, saveData, cells}: RegisterProps) {
             <button onClick={saveAndStart}>
                 Save and Start Game
             </button>
-            <p>Please set cells number(current set: {cells})</p>
+            <p>Please set cells number(current set: {stateCells})</p>
         </div>
     );
 }
