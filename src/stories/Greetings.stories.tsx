@@ -8,7 +8,7 @@ export default {
     component: Greetings,
 } as ComponentMeta<typeof Greetings>;
 
-const Template: ComponentStory<typeof Greetings> = (args) => <Greetings {...args} />;
+const Template: ComponentStory<typeof Greetings> = (args) => <Greetings/>;
 
 export const Example = Template.bind({});
 Example.args = {

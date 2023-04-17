@@ -13,6 +13,5 @@ const Template: ComponentStory<typeof Register> = (args) => <Register {...args} 
 export const Example = Template.bind({});
 Example.args = {
     saveData: () => {},
-    cells: 60,
     setRunGame: () => {}
 };

@@ -2,7 +2,12 @@ import {StateType} from '../actions';
 
 export const loadState = (): StateType | undefined => {
     const serializedState = localStorage.getItem("state");
-    return serializedState ? JSON.parse(serializedState): undefined;
+    try {
+        return serializedState ? JSON.parse(serializedState): undefined;
+    } catch (err) {
+        return undefined;
+    }
+
 };
 
 export const saveState = (state: StateType): void => {

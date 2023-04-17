@@ -1,14 +1,15 @@
 import React, {useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
+import {useSelector} from 'react-redux';
+import {StateType} from "../../redux/actions";
 import classes from './Greetings.module.scss';
 
-type GreetingsProps = {
-    name: string,
-};
-
-
-function Greetings({name}: GreetingsProps) {
+function Greetings() {
     const navigate = useNavigate();
+
+    const stateName = useSelector(
+        (state: StateType) => state.name
+    );
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
@@ -17,13 +18,13 @@ function Greetings({name}: GreetingsProps) {
         return () => {
             clearInterval(timeoutId);
         }
-    }, [name]);
+    }, []);
 
     return (
         <div>
             <h1 style={{
                 textAlign: 'center'
-            }}>{`Welcome ${name}`}</h1>
+            }}>{`Welcome ${stateName}`}</h1>
         </div>
     );
 }
