@@ -3,15 +3,16 @@ import classes from './Cell.module.scss';
 
 type CellProps = {
     lived: boolean,
+    speed: number
 };
 
-const Cell = ({lived}: CellProps) => {
+const Cell = ({lived, speed}: CellProps) => {
 
     return (
         <div
             className={`${classes.cell} ${lived ? classes.live: classes.die}`}
             style={{
-                transition: `all 0.5s ease-out`
+                transition: `all ${speed - 0.5}s ease-out`
             }}>
         </div>
     );
