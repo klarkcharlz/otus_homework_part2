@@ -20,20 +20,28 @@ function Register({setRunGame, saveData}: RegisterProps) {
         (state: StateType) => state.cells
     );
 
-    const [cellsCnt, setCellsCnt] = useState(stateCells);
+    const [cellsInLine, setCellsInLine] = useState(stateCells);
     const [name, setName] = useState(stateName);
 
+    const minimum = 3;
+
     useEffect(() => {
-        if(cellsCnt && name) {
+        if(cellsInLine && name) {
             navigate('/game');
         }
     }, []);
 
     const saveAndStart = (e: MouseEvent<HTMLElement>) => {
         e.preventDefault();
-        saveData(name, cellsCnt);
-        setRunGame(true);
-        navigate('/greet')
+        if(!name){
+            alert('Пожалуйста введите имя!')
+        } else if(cellsInLine < minimum){
+            alert('Пожалуйста введи больше 3 ячеек!')
+        } else {
+            saveData(name, cellsInLine);
+            setRunGame(true);
+            navigate('/greet')
+        }
     }
 
     return (
@@ -52,15 +60,15 @@ function Register({setRunGame, saveData}: RegisterProps) {
                 }
                 type="text"/>
             <label htmlFor="Cells">
-                Cells
+                Cells in line(minimum: {minimum})
             </label>
             <input
                 id='cells'
                 name='cells'
-                value={cellsCnt}
+                value={cellsInLine}
                 onChange={
                     (e: ChangeEvent<HTMLInputElement>) => {
-                        setCellsCnt(Number(e.target.value));
+                        setCellsInLine(Number(e.target.value));
                     }
                 }
                 type="number"/>

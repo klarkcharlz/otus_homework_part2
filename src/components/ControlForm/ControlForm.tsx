@@ -1,4 +1,4 @@
-import React, {ChangeEvent, MouseEvent, useState} from 'react';
+import React, {ChangeEvent, MouseEvent, useState, useEffect} from 'react';
 import classes from './ControlForm.module.scss';
 import {useNavigate} from "react-router-dom";
 
@@ -8,21 +8,24 @@ type ControlFormProps = {
     setPlayMode: Function,
     logOut: Function,
     reset: Function,
-    width: number,
-    height: number,
     speed: number
 };
 
 
-const ControlForm = ({logOut, reset, setSettings, width, height, speed, setPlayMode}: ControlFormProps) => {
-    const [widthCell, setWidthCell] = useState(width);
-    const [heightCell, setHeightCell] = useState(height);
+const ControlForm = (
+    {
+        logOut,
+        reset,
+        setSettings,
+        speed,
+        setPlayMode
+    }: ControlFormProps) => {
     const [animationSpeed, setAnimationSpeed] = useState(speed);
     const navigate = useNavigate();
 
     const saveSize = (e: MouseEvent<HTMLElement>) => {
         e.preventDefault();
-        setSettings(widthCell, heightCell, animationSpeed);
+        setSettings(animationSpeed);
     };
 
     const stop = (e: MouseEvent<HTMLElement>) => {
@@ -49,32 +52,6 @@ const ControlForm = ({logOut, reset, setSettings, width, height, speed, setPlayM
     return (
         <>
             <div className={classes.control_form}>
-                <label htmlFor="width">
-                    Width
-                </label>
-                <input
-                    id='width'
-                    name='width'
-                    value={widthCell}
-                    onChange={
-                        (e: ChangeEvent<HTMLInputElement>) => {
-                            setWidthCell(Number(e.target.value));
-                        }
-                    }
-                    type="number"/>
-                <label htmlFor="height">
-                    Height
-                </label>
-                <input
-                    id='height'
-                    name='height'
-                    value={heightCell}
-                    onChange={
-                        (e: ChangeEvent<HTMLInputElement>) => {
-                            setHeightCell(Number(e.target.value));
-                        }
-                    }
-                    type="number"/>
                 <label htmlFor="animationSpeed">
                     Speed
                 </label>

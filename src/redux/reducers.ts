@@ -13,7 +13,7 @@ import {
 
 const initialState = {
     name: '',
-    cells: 60
+    cells: 10
 };
 
 type Actions = ResetStateAction | LoadStateAction | SaveStateAction | SetStateAction;
