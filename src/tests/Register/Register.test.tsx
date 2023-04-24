@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import {store} from './../../redux/store';
 
 test('From element: exist in the DOM', () => {
-    const cells = 60;
+    const cells = 3;
 
     render(
         <Provider store={store}>
@@ -12,6 +12,6 @@ test('From element: exist in the DOM', () => {
         </Provider>
 
     )
-    const elem = screen.getByText<HTMLElement>(`Please set cells number(current set: ${cells})`);
+    const elem = screen.getByText<HTMLElement>(`Cells in line(minimum: ${cells})`);
     expect(elem).toBeInTheDocument();
 });

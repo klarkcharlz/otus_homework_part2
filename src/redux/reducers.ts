@@ -13,13 +13,15 @@ import {
 
 const initialState = {
     name: '',
-    cells: 60
+    cells: 10,
+    filling: 40,
+    speed: 2
 };
 
 type Actions = ResetStateAction | LoadStateAction | SaveStateAction | SetStateAction;
 
 export default function (
-    state:StateType = initialState,
+    state: StateType = initialState,
     action: Actions
 ) {
     switch (action.type) {
@@ -39,7 +41,6 @@ export default function (
                 ...action.payload
             }
         case RESET_STATE:
-            console.log('RESET_STATE');
             return {
                 ...state,
                 ...initialState

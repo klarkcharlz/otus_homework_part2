@@ -9,27 +9,40 @@ import classes from './App.module.scss';
 import {
     saveState, loadState, StateType, setState, resetState
 } from './redux/actions';
-
+import StatusModal from "./components/StatusModal/StatusModal"
+import useUserContext from "./hooks/useUserContext";
+import useStatusModalHook from "./hooks/useStatusModalHook";
 
 function App() {
     const [runGame, setRunGame] = useState(false);
+    const setStatus = useStatusModalHook();
+    // @ts-ignore
+    const {modalStatus, setModalStatus, statusText} = useUserContext();
     const dispatch = useDispatch();
 
     const logOut = () => {
         dispatch(resetState());
     }
 
-    const saveData = (name: string, cells: number) => {
+    const saveData = (
+        name: string,
+        cells: number,
+        filling: number,
+        speed: number
+    ) => {
         dispatch(
            setState({
                name,
-               cells
+               cells,
+               filling,
+               speed
            })
         );
     }
 
     return (
-        <div className={classes.app}>
+        <div className={classes.App}>
+            <StatusModal open={modalStatus} setOpen={setModalStatus} status={statusText}/>
             <Router>
                 <Routes>
                     <Route

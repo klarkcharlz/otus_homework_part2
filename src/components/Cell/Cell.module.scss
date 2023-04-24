@@ -1,22 +1,16 @@
 .cell{
-  border: 2px solid white;
+  border: 1px solid black;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 20px;
+  height: 20px;
 }
 
-.cell_visible {
+.live{
   background-color: green;
 }
 
-.cell_hidden {
-  background-color: black;
-}
-
-.visible{
-  visibility: visible;
-}
-
-.hidden{
-  visibility: hidden;
+.die{
+  background-color: gray;
 }

@@ -5,7 +5,9 @@ export const RESET_STATE = "RESET_STATE";
 
 export type StateType = {
     name: string,
-    cells: number
+    cells: number,
+    filling: number,
+    speed: number
 }
 
 export const saveState = (data: StateType): SaveStateAction => (

@@ -10,20 +10,14 @@ export default {
 
 const Template: ComponentStory<typeof Cell> = (args) => <Cell {...args} />;
 
-export const Large = Template.bind({});
-Large.args = {
-  id: 100,
-  active: true,
-  width: 400,
-  height: 400,
+export const Live = Template.bind({});
+Live.args = {
+  lived: true,
   speed: 2
 };
 
-export const Small = Template.bind({});
-Small.args = {
-  id: 1,
-  active: false,
-  width: 50,
-  height: 50,
-  speed: 0.5
+export const Dead = Template.bind({});
+Dead.args = {
+  lived: false,
+  speed: 2
 };

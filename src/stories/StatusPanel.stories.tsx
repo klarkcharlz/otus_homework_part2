@@ -13,16 +13,12 @@ const Template: ComponentStory<typeof StatusPanel> = (args) =>
 
 export const On = Template.bind({});
 On.args = {
-    width: 200,
-    height: 200,
     speed: 2,
     run: true
 };
 
 export const Off = Template.bind({});
 Off.args = {
-    width: 200,
-    height: 200,
     speed: 2,
     run: false
 };

@@ -1,13 +1,10 @@
-import {fireEvent, render, screen} from '@testing-library/react';
+import {render} from '@testing-library/react';
 import Cell from '../../components/Cell/Cell';
 
 test('From element: exist in the DOM', () => {
-    const id = 3;
-    const active = false;
-    render(<Cell active={active} id={id} speed={2} width={200} height={200}/>)
-    const elem = screen.getByText<HTMLElement>(`${3}`);
-    expect(elem).toBeInTheDocument();
-    expect(elem).toHaveClass('hidden');
-    fireEvent.click(elem);
-    expect(elem).toHaveClass('visible');
+    const lived = true;
+    const {container} = render(<Cell lived={lived} speed={2} />)
+    const elems = container.getElementsByClassName('cell live');
+    expect(elems.length).toBe(1);
+    expect(elems[0]).toBeInTheDocument();
 });
