@@ -84,20 +84,32 @@ const Field = ({runGame, setRunGame, logOut}: FieldProps) => {
         const stateCellsInLine = useSelector(
             (state: StateType) => state.cells
         );
+        const stateFilling = useSelector(
+            (state: StateType) => state.filling
+        );
+        const stateSpeed = useSelector(
+            (state: StateType) => state.speed
+        );
         const setStatus = useStatusModalHook();
-        const [speed, setSpeed] = useState(defaultSettings.speed);
+        const [speed, setSpeed] = useState(stateSpeed);
         const [gameField, setGameField] = useState(
-            generateStartedArray(40, stateCellsInLine)
+            generateStartedArray(stateFilling, stateCellsInLine)
         );
 
         const setSettings = (speed: number) => {
-            setSpeed(speed);
+            if(speed < 1){
+                setStatus('Скорость не может быть меньше 1')
+            } else {
+                setSpeed(speed)
+            }
         }
 
         const reset = () => {
-            setSpeed(defaultSettings.speed);
+            setSpeed(stateSpeed);
             setRunGame(defaultSettings.playMode);
-            setGameField(generateStartedArray(40, stateCellsInLine));
+            setGameField(generateStartedArray(
+                stateFilling, stateCellsInLine)
+            );
         }
 
         const calculateNewState = () => {

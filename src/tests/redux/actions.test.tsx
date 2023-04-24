@@ -5,14 +5,20 @@ describe("rootReducer", () => {
     test("should set name state with SET_STATE action", () => {
         const initialState = {
             name: '',
-            cells: 60
+            cells: 60,
+            filling: 40,
+            speed: 2
         };
         const expectedState = {
             name: "John",
-            cells: 60
+            cells: 60,
+            filling: 40,
+            speed: 2
         };
         const nextState = rootReducer(
-            initialState, setState({name: "John", cells: 60})
+            initialState, setState(
+                {name: "John", cells: 60, filling: 40, speed: 2}
+            )
         );
         expect(nextState).toEqual(expectedState);
     });

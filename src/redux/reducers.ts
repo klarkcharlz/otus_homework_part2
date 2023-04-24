@@ -13,7 +13,9 @@ import {
 
 const initialState = {
     name: '',
-    cells: 10
+    cells: 10,
+    filling: 40,
+    speed: 2
 };
 
 type Actions = ResetStateAction | LoadStateAction | SaveStateAction | SetStateAction;

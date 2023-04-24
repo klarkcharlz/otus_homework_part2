@@ -9,7 +9,9 @@ import {setState} from './../redux/actions';
 store.dispatch(setState(
     {
         name: 'Mike',
-        cells: 10
+        cells: 10,
+        filling: 40,
+        speed: 2
     }
 ))
 

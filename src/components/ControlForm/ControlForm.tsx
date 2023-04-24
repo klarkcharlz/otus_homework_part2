@@ -65,21 +65,21 @@ const ControlForm = (
                         }
                     }
                     type="number"/>
-                <button onClick={saveSize}>
+                <button className={classes.button8} onClick={saveSize}>
                     Save
                 </button>
             </div>
             <div className={classes.control_form}>
-                <button type='button' onClick={stop}>
+                <button className={classes.button8} type='button' onClick={stop}>
                     Stop
                 </button>
-                <button type='button' onClick={run}>
+                <button className={classes.button8} type='button' onClick={run}>
                     Start
                 </button>
-                <button type='button' onClick={resetGame}>
+                <button className={classes.button8} type='button' onClick={resetGame}>
                     Reset
                 </button>
-                <button type='button' onClick={logout}>
+                <button className={classes.button8} type='button' onClick={logout}>
                     Logout
                 </button>
             </div>

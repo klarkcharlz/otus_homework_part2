@@ -2,10 +2,13 @@ export const SAVE_STATE = 'SAVE_STATE';
 export const LOAD_STATE = 'LOAD_STATE';
 export const SET_STATE = "SET_STATE";
 export const RESET_STATE = "RESET_STATE";
+export const UPDATE_STATE = "UPDATE_STATE";
 
 export type StateType = {
     name: string,
-    cells: number
+    cells: number,
+    filling: number,
+    speed: number
 }
 
 export const saveState = (data: StateType): SaveStateAction => (

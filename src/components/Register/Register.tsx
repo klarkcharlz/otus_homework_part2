@@ -20,9 +20,17 @@ function Register({setRunGame, saveData}: RegisterProps) {
     const stateCells = useSelector(
         (state: StateType) => state.cells
     );
+    const stateSpeed = useSelector(
+        (state: StateType) => state.speed
+    );
+    const stateFilling = useSelector(
+        (state: StateType) => state.filling
+    );
 
     const [cellsInLine, setCellsInLine] = useState(stateCells);
     const [name, setName] = useState(stateName);
+    const [filling, setFilling] = useState(stateFilling);
+    const [speed, setSpeed] = useState(stateSpeed);
 
     const minimum = 3;
 
@@ -38,8 +46,12 @@ function Register({setRunGame, saveData}: RegisterProps) {
             setStatus('Пожалуйста введите имя!')
         } else if(cellsInLine < minimum){
             setStatus('Пожалуйста введи больше 3 ячеек!')
+        } else if(filling < 10) {
+            setStatus('Не рекомендуется ставить стартовый процент заполнения поля меньше 10 процентов!')
+        } else if(speed < 1){
+            setStatus('Скорость не может быть меньше 1')
         } else {
-            saveData(name, cellsInLine);
+            saveData(name, cellsInLine, filling, speed);
             setRunGame(true);
             navigate('/greet')
         }
@@ -73,10 +85,35 @@ function Register({setRunGame, saveData}: RegisterProps) {
                     }
                 }
                 type="number"/>
-            <button onClick={saveAndStart}>
+            <label htmlFor="filling">
+                field completion percentage
+            </label>
+            <input
+                id='filling'
+                name='filling'
+                value={filling}
+                onChange={
+                    (e: ChangeEvent<HTMLInputElement>) => {
+                        setFilling(Number(e.target.value));
+                    }
+                }
+                type="number"/>
+            <label htmlFor="speed">
+                Speed
+            </label>
+            <input
+                id='speed'
+                name='speed'
+                value={speed}
+                onChange={
+                    (e: ChangeEvent<HTMLInputElement>) => {
+                        setSpeed(Number(e.target.value));
+                    }
+                }
+                type="number"/>
+            <button className={classes.button8} onClick={saveAndStart}>
                 Save and Start Game
             </button>
-            <p>Please set cells number(current set: {stateCells})</p>
         </div>
     );
 }

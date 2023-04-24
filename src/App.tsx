@@ -11,9 +11,11 @@ import {
 } from './redux/actions';
 import StatusModal from "./components/StatusModal/StatusModal"
 import useUserContext from "./hooks/useUserContext";
+import useStatusModalHook from "./hooks/useStatusModalHook";
 
 function App() {
     const [runGame, setRunGame] = useState(false);
+    const setStatus = useStatusModalHook();
     // @ts-ignore
     const {modalStatus, setModalStatus, statusText} = useUserContext();
     const dispatch = useDispatch();
@@ -22,18 +24,25 @@ function App() {
         dispatch(resetState());
     }
 
-    const saveData = (name: string, cells: number) => {
+    const saveData = (
+        name: string,
+        cells: number,
+        filling: number,
+        speed: number
+    ) => {
         dispatch(
            setState({
                name,
-               cells
+               cells,
+               filling,
+               speed
            })
         );
     }
 
     return (
-        <div className={classes.app}>
-             <StatusModal open={modalStatus} setOpen={setModalStatus} status={statusText}/>
+        <div className={classes.App}>
+            <StatusModal open={modalStatus} setOpen={setModalStatus} status={statusText}/>
             <Router>
                 <Routes>
                     <Route
