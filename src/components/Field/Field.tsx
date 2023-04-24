@@ -5,6 +5,7 @@ import ControlForm from '../ControlForm/ControlForm';
 import StatusPanel from '../StatusPanel/StatusPanel';
 import {useSelector} from 'react-redux';
 import {StateType} from "../../redux/actions";
+import useStatusModalHook from "../../hooks/useStatusModalHook";
 
 
 type FieldProps = {
@@ -83,7 +84,7 @@ const Field = ({runGame, setRunGame, logOut}: FieldProps) => {
         const stateCellsInLine = useSelector(
             (state: StateType) => state.cells
         );
-
+        const setStatus = useStatusModalHook();
         const [speed, setSpeed] = useState(defaultSettings.speed);
         const [gameField, setGameField] = useState(
             generateStartedArray(40, stateCellsInLine)
@@ -109,10 +110,10 @@ const Field = ({runGame, setRunGame, logOut}: FieldProps) => {
                 }
                 if (compareGameField(gameField, newGameField)) {
                     setRunGame(false);
-                    alert('End Game! Cells stopped progress!');
+                    setStatus('End Game! Cells stopped progress!');
                 } else if(checkEmptyField(newGameField)){
                     setRunGame(false);
-                    alert('End Game! All cells die!');
+                    setStatus('End Game! All cells die!');
                 }
                 setGameField(newGameField);
             }

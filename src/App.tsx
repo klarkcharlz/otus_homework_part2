@@ -9,10 +9,13 @@ import classes from './App.module.scss';
 import {
     saveState, loadState, StateType, setState, resetState
 } from './redux/actions';
-
+import StatusModal from "./components/StatusModal/StatusModal"
+import useUserContext from "./hooks/useUserContext";
 
 function App() {
     const [runGame, setRunGame] = useState(false);
+    // @ts-ignore
+    const {modalStatus, setModalStatus, statusText} = useUserContext();
     const dispatch = useDispatch();
 
     const logOut = () => {
@@ -30,6 +33,7 @@ function App() {
 
     return (
         <div className={classes.app}>
+             <StatusModal open={modalStatus} setOpen={setModalStatus} status={statusText}/>
             <Router>
                 <Routes>
                     <Route

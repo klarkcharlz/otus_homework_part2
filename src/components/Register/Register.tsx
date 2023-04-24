@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {useSelector} from 'react-redux';
 import {StateType} from './../../redux/actions';
 import classes from './Register.module.scss';
+import useStatusModalHook from "../../hooks/useStatusModalHook";
 
 type RegisterProps = {
     saveData: Function,
@@ -12,7 +13,7 @@ type RegisterProps = {
 
 function Register({setRunGame, saveData}: RegisterProps) {
     const navigate = useNavigate();
-
+    const setStatus = useStatusModalHook();
     const stateName = useSelector(
         (state: StateType) => state.name
     );
@@ -34,9 +35,9 @@ function Register({setRunGame, saveData}: RegisterProps) {
     const saveAndStart = (e: MouseEvent<HTMLElement>) => {
         e.preventDefault();
         if(!name){
-            alert('Пожалуйста введите имя!')
+            setStatus('Пожалуйста введите имя!')
         } else if(cellsInLine < minimum){
-            alert('Пожалуйста введи больше 3 ячеек!')
+            setStatus('Пожалуйста введи больше 3 ячеек!')
         } else {
             saveData(name, cellsInLine);
             setRunGame(true);

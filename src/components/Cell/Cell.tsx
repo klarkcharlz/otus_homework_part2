@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from 'react';
+import React from 'react';
 import classes from './Cell.module.scss';
 
 type CellProps = {

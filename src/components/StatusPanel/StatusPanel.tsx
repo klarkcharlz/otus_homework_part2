@@ -1,7 +1,5 @@
 import React from 'react';
 import classes from './StatusPanel.module.scss';
-import { Provider } from 'react-redux';
-import {store} from './../../redux/store';
 
 type StatusProps = {
     speed: number,

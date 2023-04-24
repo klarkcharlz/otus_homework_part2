@@ -1,4 +1,4 @@
-import React, {ChangeEvent, MouseEvent, useState, useEffect} from 'react';
+import React, {ChangeEvent, MouseEvent, useState} from 'react';
 import classes from './ControlForm.module.scss';
 import {useNavigate} from "react-router-dom";
 
